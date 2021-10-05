@@ -1,0 +1,26 @@
+﻿<Properties StartupConfiguration="{A608E084-6036-427E-907E-0225008CE143}|Default">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Messenger/MainActivity.cs">
+    <Files>
+      <File FileName="Messenger/MainActivity.cs" Line="62" Column="1" />
+      <File FileName="Messenger/Resources/layout/Acc_Create.xml" Line="1" Column="1" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="Messenger" expanded="True" selected="True">
+            <Node name="Messenger" expanded="True">
+              <Node name="Resources" expanded="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.ItemProperties.Messenger AndroidDesignerPreferredTheme="AppTheme.NoActionBar" AndroidDesignerPreferredDevice="5.4in FWVGA" PreferredExecutionTarget="Android.galaxy_nexus_r_11_0_-_api_30" />
+</Properties>
