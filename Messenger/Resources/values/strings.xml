@@ -15,4 +15,6 @@
     <string name="Font_Colour">Font Colour</string>
     <string name="Application_Colour">Application Colour</string>
     <string name="Profile">Profile</string>
+    <string name="UserBad">USERNAME ALREADY IN USE</string>
+    <string name="Incorrect">USERNAME OR PASSWORD INCORRECT</string>
 </resources>

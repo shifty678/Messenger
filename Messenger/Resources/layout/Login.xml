@@ -35,6 +35,18 @@
         android:layout_width="match_parent"
         android:layout_height="108.0dp"
         android:id="@+id/linearLayout8">
+        <TextView
+            android:text="Text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/UserLoginView"
+            android:visibility="visible" />
+        <TextView
+            android:text="Text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/PassLoginView"
+            android:visibility="visible" />
     </LinearLayout>
     <LinearLayout
         android:orientation="vertical"
@@ -55,7 +67,7 @@
             android:inputType="textEmailAddress"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/editText2"
+            android:id="@+id/UsernameLogin"
             android:layout_marginRight="80dp"
             android:layout_marginLeft="80dp" />
 
@@ -90,9 +102,17 @@
             android:inputType="textPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/editText1"
+            android:id="@+id/PasswordLogin"
             android:layout_marginRight="80dp"
             android:layout_marginLeft="80dp" />
+        <TextView
+            android:text="@string/Incorrect"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/Incorrect"
+            android:textAlignment="center"
+            android:textColor="#ff880e13"
+            android:visibility="invisible" />
     </LinearLayout>
     <LinearLayout
         android:orientation="vertical"

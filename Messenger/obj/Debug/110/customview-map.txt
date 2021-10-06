@@ -10,7 +10,7 @@ background;obj\Debug\110\res\mipmap-anydpi-v26\ic_launcher.xml
 background;obj\Debug\110\res\mipmap-anydpi-v26\ic_launcher_round.xml
 Button;obj\Debug\110\res\layout\acc_create.xml
 Button;obj\Debug\110\res\layout\login.xml
-cache-path;C:\Users\Steven\source\repos\Messenger\Messenger\obj\Debug\110\lp\41\jl\res\xml\xamarin_essentials_fileprovider_file_paths.xml
+cache-path;C:\Users\Steven\Desktop\Messenger\Messenger\obj\Debug\110\lp\41\jl\res\xml\xamarin_essentials_fileprovider_file_paths.xml
 clip-path;obj\Debug\110\res\drawable-v21\ic_menu_log_out.xml
 color;obj\Debug\110\res\values\colors.xml
 color;obj\Debug\110\res\values\ic_launcher_background.xml
@@ -21,8 +21,8 @@ com.google.android.material.navigation.NavigationView;obj\Debug\110\res\layout\a
 dimen;obj\Debug\110\res\values\dimens.xml
 EditText;obj\Debug\110\res\layout\acc_create.xml
 EditText;obj\Debug\110\res\layout\login.xml
-external-cache-path;C:\Users\Steven\source\repos\Messenger\Messenger\obj\Debug\110\lp\41\jl\res\xml\xamarin_essentials_fileprovider_file_paths.xml
-external-path;C:\Users\Steven\source\repos\Messenger\Messenger\obj\Debug\110\lp\41\jl\res\xml\xamarin_essentials_fileprovider_file_paths.xml
+external-cache-path;C:\Users\Steven\Desktop\Messenger\Messenger\obj\Debug\110\lp\41\jl\res\xml\xamarin_essentials_fileprovider_file_paths.xml
+external-path;C:\Users\Steven\Desktop\Messenger\Messenger\obj\Debug\110\lp\41\jl\res\xml\xamarin_essentials_fileprovider_file_paths.xml
 foreground;obj\Debug\110\res\mipmap-anydpi-v26\ic_launcher.xml
 foreground;obj\Debug\110\res\mipmap-anydpi-v26\ic_launcher_round.xml
 gradient;obj\Debug\110\res\drawable\side_nav_bar.xml
@@ -52,7 +52,7 @@ path;obj\Debug\110\res\drawable-v21\ic_menu_send.xml
 path;obj\Debug\110\res\drawable-v21\ic_menu_settings.xml
 path;obj\Debug\110\res\drawable-v21\ic_menu_share.xml
 path;obj\Debug\110\res\drawable-v21\ic_menu_slideshow.xml
-paths;C:\Users\Steven\source\repos\Messenger\Messenger\obj\Debug\110\lp\41\jl\res\xml\xamarin_essentials_fileprovider_file_paths.xml
+paths;C:\Users\Steven\Desktop\Messenger\Messenger\obj\Debug\110\lp\41\jl\res\xml\xamarin_essentials_fileprovider_file_paths.xml
 RelativeLayout;obj\Debug\110\res\layout\acc_create.xml
 resources;obj\Debug\110\res\values\colors.xml
 resources;obj\Debug\110\res\values\dimens.xml

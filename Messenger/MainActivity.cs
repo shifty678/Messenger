@@ -21,6 +21,7 @@ namespace Messenger
     [Activity(Label = "@string/app_name", Theme = "@style/Theme.AppCompat.NoActionBar", MainLauncher = true)]
     public class MainActivity : AppCompatActivity, NavigationView.IOnNavigationItemSelectedListener
     {
+        string SqlConnect = @"Data Source = messenger1.database.windows.net; Initial Catalog = Messenger; User ID = shifty678; Password=Stargate1;Connect Timeout = 30; Encrypt=True;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -38,8 +39,79 @@ namespace Messenger
             Button Createaccount1 = FindViewById<Button>(Resource.Id.LoginCreate);
             Createaccount1.Click += Createaccount;
 
+
+
+
+            var userloginview = FindViewById<TextView>(Resource.Id.UserLoginView);
+            var userlogintext = FindViewById<EditText>(Resource.Id.UsernameLogin);
+
+            var passloginview = FindViewById<TextView>(Resource.Id.PassLoginView);
+            var passlogintext = FindViewById<EditText>(Resource.Id.PasswordLogin);
+
+            var incorrect = FindViewById <TextView>(Resource.Id.Incorrect);
+
+
+            userlogintext.TextChanged += (object sender, Android.Text.TextChangedEventArgs n) =>
+            {
+                userloginview.Text = n.Text.ToString();
+            };
+
+            passlogintext.TextChanged += (object sender, Android.Text.TextChangedEventArgs n) =>
+            {
+                passloginview.Text = n.Text.ToString();
+            };
+
+            //Button LoginButton = FindViewById<Button>(Resource.Id.Login_button);
+            //LoginButton.Click += Home;
+
             Button LoginButton = FindViewById<Button>(Resource.Id.Login_button);
-            LoginButton.Click += Home;
+            LoginButton.Click += (sender, e) =>
+            {
+
+                SqlConnection con = new SqlConnection(SqlConnect);
+
+                SqlCommand check_User_Namelogin = new SqlCommand("SELECT COUNT (*) FROM [Users] WHERE ([Username] = @user)", con);
+                check_User_Namelogin.Parameters.AddWithValue("@user", userloginview.Text);
+                con.Open();
+                int UserExistlogin = (int)check_User_Namelogin.ExecuteScalar();
+
+
+                if (UserExistlogin > 0)
+                {
+
+                    SqlCommand checkpass = new SqlCommand("SELECT COUNT (*) FROM [Users] WHERE [Username] LIKE (@user) AND [Password] LIKE (@pass)", con);
+                    checkpass.Parameters.AddWithValue("@user", userloginview.Text);
+                    checkpass.Parameters.AddWithValue("@pass", passloginview.Text);
+                    int passcorrect = (int)checkpass.ExecuteScalar();
+
+
+                    if (passcorrect > 0)
+                    {
+                        Home(null,null);
+                    }
+                    else
+                    {
+                        incorrect.Visibility = ViewStates.Visible;
+                    }
+
+
+                }
+
+                else
+                {
+                    incorrect.Visibility = ViewStates.Visible;
+                }
+
+
+                con.Close();
+
+
+
+
+
+            };
+
+
         }
 
         public  void Createaccount(object sender, EventArgs even)
@@ -47,10 +119,6 @@ namespace Messenger
 
             SetContentView(Resource.Layout.Acc_Create);
 
-            Button Createaccount = FindViewById<Button>(Resource.Id.CreateAccount_Create_Button);
-            Createaccount.Click += Login;
-
-                
             var nameview = FindViewById<TextView>(Resource.Id.nameView);
             var nametext = FindViewById<EditText>(Resource.Id.Nametext);
 
@@ -59,46 +127,55 @@ namespace Messenger
 
             var passview = FindViewById<TextView>(Resource.Id.passwordView);
             var passtext = FindViewById<EditText>(Resource.Id.passwordText);
+            var passbad = FindViewById<TextView>(Resource.Id.PassTextBad);
 
-            nametext.TextChanged += (object sender, Android.Text.TextChangedEventArgs e) =>
+            nametext.TextChanged += (object sender, Android.Text.TextChangedEventArgs n) =>
             {
-                nameview.Text = e.Text.ToString();
+                nameview.Text = n.Text.ToString();
             };
 
-            usertext.TextChanged += (object sender, Android.Text.TextChangedEventArgs t) =>
+            usertext.TextChanged += (object sender, Android.Text.TextChangedEventArgs u) =>
             {
-                userview.Text = t.Text.ToString();
+                userview.Text = u.Text.ToString();
             };
 
-            passtext.TextChanged += (object sender, Android.Text.TextChangedEventArgs f) =>
+            passtext.TextChanged += (object sender, Android.Text.TextChangedEventArgs p) =>
             {
-                passview.Text = f.Text.ToString();
+                passview.Text = p.Text.ToString();
             };
-
-
 
             Button Account = FindViewById<Button>(Resource.Id.CreateAccount_Create_Button);
             Account.Click += (sender, e) =>
             {
 
+                SqlConnection con = new SqlConnection(SqlConnect);
 
-                SqlConnection con =
-                new SqlConnection(@"Data Source=messenger1.database.windows.net;Initial Catalog=Messenger;User ID=shifty678;Password=Stargate1;Connect Timeout=30;Encrypt=True;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
-
-                SqlCommand cmd = new SqlCommand();
-                cmd.CommandType = CommandType.Text;
-                cmd.CommandText = $@" INSERT INTO Users 
-                ([Name],[Username],[Password])
-                Values
-                ('{nameview.Text}','{userview.Text}','{passview.Text}')";
-
-                cmd.Connection = con;
-
+                SqlCommand check_User_Name = new SqlCommand("SELECT COUNT(*) FROM [Users] WHERE ([Username] = @user)", con);
+                check_User_Name.Parameters.AddWithValue("@user", userview.Text);
                 con.Open();
-                cmd.ExecuteNonQuery();
+                int UserExist = (int)check_User_Name.ExecuteScalar();
+
+                if (UserExist > 0)
+                {
+                    passbad.Visibility = ViewStates.Visible;
+                }
+
+                else
+                {
+                    SqlCommand cmd = new SqlCommand();
+                    cmd.CommandType = CommandType.Text;
+                    cmd.CommandText = $@" INSERT INTO Users 
+                    ([Name],[Username],[Password])
+                    Values
+                    ('{nameview.Text}','{userview.Text}','{passview.Text}')";
+
+                    cmd.Connection = con;
+                    
+                    cmd.ExecuteNonQuery(); 
+                    Account.Click += Login;
+                }
+
                 con.Close();
-
-
             };
         }
 

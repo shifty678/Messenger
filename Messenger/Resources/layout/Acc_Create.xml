@@ -34,11 +34,12 @@
                 android:textAlignment="center"
                 android:contextClickable="true" />
         </Toolbar>
-		<TextView
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:id="@+id/usernameView"
-			android:visibility="invisible" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/usernameView"
+            android:visibility="invisible"
+            android:textColor="#ffffffff" />
 		<TextView
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
@@ -88,6 +89,15 @@
             android:id="@+id/usernameText"
             android:layout_marginRight="80dp"
             android:layout_marginLeft="80dp" />
+        <TextView
+            android:text="@string/UserBad"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/PassTextBad"
+            android:textColor="#ffffffff"
+            android:textAlignment="center"
+            android:visibility="invisible" 
+            />
 
         <TextView
             android:text="@string/Password"
@@ -126,5 +136,11 @@
                 android:onClick="Createme"/>
         </LinearLayout>
     </LinearLayout>
+    <TextView
+        android:text="Text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@id/linearLayout2"
+        android:id="@+id/textView7" />
 
 </RelativeLayout>
