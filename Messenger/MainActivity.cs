@@ -39,9 +39,6 @@ namespace Messenger
             Button Createaccount1 = FindViewById<Button>(Resource.Id.LoginCreate);
             Createaccount1.Click += Createaccount;
 
-
-
-
             var userloginview = FindViewById<TextView>(Resource.Id.UserLoginView);
             var userlogintext = FindViewById<EditText>(Resource.Id.UsernameLogin);
 
@@ -49,7 +46,6 @@ namespace Messenger
             var passlogintext = FindViewById<EditText>(Resource.Id.PasswordLogin);
 
             var incorrect = FindViewById <TextView>(Resource.Id.Incorrect);
-
 
             userlogintext.TextChanged += (object sender, Android.Text.TextChangedEventArgs n) =>
             {
@@ -60,9 +56,6 @@ namespace Messenger
             {
                 passloginview.Text = n.Text.ToString();
             };
-
-            //Button LoginButton = FindViewById<Button>(Resource.Id.Login_button);
-            //LoginButton.Click += Home;
 
             Button LoginButton = FindViewById<Button>(Resource.Id.Login_button);
             LoginButton.Click += (sender, e) =>
@@ -93,22 +86,13 @@ namespace Messenger
                     {
                         incorrect.Visibility = ViewStates.Visible;
                     }
-
-
                 }
 
                 else
                 {
                     incorrect.Visibility = ViewStates.Visible;
                 }
-
-
                 con.Close();
-
-
-
-
-
             };
 
 
@@ -129,6 +113,8 @@ namespace Messenger
             var passtext = FindViewById<EditText>(Resource.Id.passwordText);
             var passbad = FindViewById<TextView>(Resource.Id.PassTextBad);
 
+            var required = FindViewById<TextView>(Resource.Id.Requiredfield);
+
             nametext.TextChanged += (object sender, Android.Text.TextChangedEventArgs n) =>
             {
                 nameview.Text = n.Text.ToString();
@@ -147,35 +133,38 @@ namespace Messenger
             Button Account = FindViewById<Button>(Resource.Id.CreateAccount_Create_Button);
             Account.Click += (sender, e) =>
             {
-
                 SqlConnection con = new SqlConnection(SqlConnect);
-
                 SqlCommand check_User_Name = new SqlCommand("SELECT COUNT(*) FROM [Users] WHERE ([Username] = @user)", con);
                 check_User_Name.Parameters.AddWithValue("@user", userview.Text);
                 con.Open();
                 int UserExist = (int)check_User_Name.ExecuteScalar();
 
-                if (UserExist > 0)
+                try
                 {
-                    passbad.Visibility = ViewStates.Visible;
-                }
-
-                else
-                {
-                    SqlCommand cmd = new SqlCommand();
-                    cmd.CommandType = CommandType.Text;
-                    cmd.CommandText = $@" INSERT INTO Users 
-                    ([Name],[Username],[Password])
+                    if (UserExist > 0)
+                    {
+                        passbad.Visibility = ViewStates.Visible;
+                        con.Close();
+                    }
+                    else
+                    {
+                        SqlCommand cmd = new SqlCommand();
+                        cmd.CommandType = CommandType.Text;
+                        cmd.CommandText = $@" INSERT INTO Users 
+                    ([Name_],[Username],[Password])
                     Values
                     ('{nameview.Text}','{userview.Text}','{passview.Text}')";
-
-                    cmd.Connection = con;
-                    
-                    cmd.ExecuteNonQuery(); 
-                    Account.Click += Login;
+                        cmd.Connection = con;
+                        cmd.ExecuteNonQuery();
+                        con.Close();
+                        Account.Click += Login;
+                    }
                 }
-
-                con.Close();
+                catch(SqlException)
+                {
+                    required.Visibility = ViewStates.Visible;
+                    con.Close();
+                }
             };
         }
 
