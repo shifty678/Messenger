@@ -3,6 +3,7 @@ using System.Data;
 using System.Data.SqlClient;
 using Android.App;
 using Android.Content;
+using Android.InputMethodServices;
 using Android.OS;
 using Android.Runtime;
 using Android.Views;
@@ -15,6 +16,7 @@ using Google.Android.Material.FloatingActionButton;
 using Google.Android.Material.Navigation;
 using Google.Android.Material.Snackbar;
 using Toolbar = AndroidX.AppCompat.Widget.Toolbar;
+
 
 namespace Messenger
 {
@@ -151,9 +153,9 @@ namespace Messenger
                         SqlCommand cmd = new SqlCommand();
                         cmd.CommandType = CommandType.Text;
                         cmd.CommandText = $@" INSERT INTO Users 
-                    ([Name_],[Username],[Password])
-                    Values
-                    ('{nameview.Text}','{userview.Text}','{passview.Text}')";
+                        ([Name_],[Username],[Password])
+                        Values
+                        ('{nameview.Text}','{userview.Text}','{passview.Text}')";
                         cmd.Connection = con;
                         cmd.ExecuteNonQuery();
                         con.Close();
@@ -197,23 +199,21 @@ namespace Messenger
             SetSupportActionBar(toolbar);
 
             toolbar.Title = "Settings";
-
-
         }
         private void FabOnClick(object sender, EventArgs eventArgs)
         {
             View view = (View)sender;
             Snackbar.Make(view, "Replace with your own action", Snackbar.LengthLong)
-                .SetAction("Action", (Android.Views.View.IOnClickListener)null).Show();
+                .SetAction("Action", (View.IOnClickListener)null).Show();
         }
     
 
 
         public override void OnBackPressed()
         {
-
+    
             //Toast.MakeText(this, "you touched me!", ToastLength.Short).Show();
-            //base.OnBackPressed();
+            base.OnBackPressed();
             //var intent = new Intent(this, typeof(MainActivity));
             //StartActivity(intent);
             //base.OnBackPressed();
