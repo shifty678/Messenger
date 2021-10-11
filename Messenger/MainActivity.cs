@@ -28,9 +28,9 @@ namespace Messenger
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-            Xamarin.Essentials.Platform.Init(this, savedInstanceState);
+            Xamarin.Essentials.Platform.Init(this, savedInstanceState);            
             Login(null, null);
-
+            
         }
 
         public void Login(object sender, EventArgs e)
@@ -41,22 +41,25 @@ namespace Messenger
             Button Createaccount1 = FindViewById<Button>(Resource.Id.LoginCreate);
             Createaccount1.Click += Createaccount;
 
+            Button Createaccount2 = FindViewById<Button>(Resource.Id.Login_button);
+            Createaccount1.Click += Home;
+
             var userloginview = FindViewById<TextView>(Resource.Id.UserLoginView);
             var userlogintext = FindViewById<EditText>(Resource.Id.UsernameLogin);
 
             var passloginview = FindViewById<TextView>(Resource.Id.PassLoginView);
             var passlogintext = FindViewById<EditText>(Resource.Id.PasswordLogin);
 
-            var incorrect = FindViewById <TextView>(Resource.Id.Incorrect);
+            var incorrect = FindViewById<TextView>(Resource.Id.Incorrect);
 
             userlogintext.TextChanged += (object sender, Android.Text.TextChangedEventArgs n) =>
             {
                 userloginview.Text = n.Text.ToString();
             };
 
-            passlogintext.TextChanged += (object sender, Android.Text.TextChangedEventArgs n) =>
+            passlogintext.TextChanged += (object sender, Android.Text.TextChangedEventArgs l) =>
             {
-                passloginview.Text = n.Text.ToString();
+                passloginview.Text = l.Text.ToString();
             };
 
             Button LoginButton = FindViewById<Button>(Resource.Id.Login_button);
@@ -82,7 +85,12 @@ namespace Messenger
 
                     if (passcorrect > 0)
                     {
-                        Home(null,null);
+                        NavigationView navigationView = (NavigationView)FindViewById(Resource.Id.nav_view);
+                        //View headerView = navigationView.GetHeaderView(0);
+                        var navHeaderView = navigationView.InflateHeaderView(Resource.Layout.nav_header_main);
+                        TextView navUsername = (TextView)navHeaderView.FindViewById(Resource.Id.textView);
+                        navUsername.Text = "hello";
+                        Home(null, null);
                     }
                     else
                     {
@@ -170,7 +178,6 @@ namespace Messenger
             };
         }
 
-
         public void Home(object sender, EventArgs e)
         {
             SetContentView(Resource.Layout.activity_main);
@@ -192,11 +199,14 @@ namespace Messenger
 
         public void Settings(object sender, EventArgs e)
         {
-
+            
             SetContentView(Resource.Layout.Settings);
 
             Toolbar toolbar = FindViewById<Toolbar>(Resource.Id.settings_toolbar);
             SetSupportActionBar(toolbar);
+
+            SupportActionBar.SetDisplayHomeAsUpEnabled(true);
+            SupportActionBar.SetDisplayShowHomeEnabled(true);
 
             toolbar.Title = "Settings";
         }
@@ -206,14 +216,12 @@ namespace Messenger
             Snackbar.Make(view, "Replace with your own action", Snackbar.LengthLong)
                 .SetAction("Action", (View.IOnClickListener)null).Show();
         }
-    
-
-
+ 
         public override void OnBackPressed()
         {
-    
-            //Toast.MakeText(this, "you touched me!", ToastLength.Short).Show();
-            base.OnBackPressed();
+
+            Toast.MakeText(this, "OUCH!", ToastLength.Short).Show();
+            //base.OnBackPressed();
             //var intent = new Intent(this, typeof(MainActivity));
             //StartActivity(intent);
             //base.OnBackPressed();
@@ -231,24 +239,24 @@ namespace Messenger
             //}
         }
 
-        // public override bool OnCreateOptionsMenu(IMenu menu)
+        //public override bool OnCreateOptionsMenu(IMenu menu)
         //{
-        //  MenuInflater.Inflate(Resource.Menu.menu_main, menu);
-        //return true;
+        //    MenuInflater.Inflate(Resource.Menu.menu_main, menu);
+        //    return true;
         //}
 
-        //public override bool OnOptionsItemSelected(IMenuItem item)
-        //{
-        //    int id = item.ItemId;
-        //    if (id == Resource.Id.action_settings)
-        //    {
-        //        // SetContentView(Resource.Layout.Login);
+        public override bool OnOptionsItemSelected(IMenuItem item)
+        {
+            switch (item.ItemId)
+            {
+                case global::Android.Resource.Id.Home:
+                    Home(null, null);
+                    return true;
 
-        //    }
-
-        //    return base.OnOptionsItemSelected(item);
-        //}
-
+                default:
+                    return  base.OnOptionsItemSelected(item);  
+            }
+        }
 
         public bool OnNavigationItemSelected(IMenuItem item)
         {
@@ -256,7 +264,7 @@ namespace Messenger
 
             if (id == Resource.Id.nav_profile)
             {
-
+                Toast.MakeText(this, "Not Implemented", ToastLength.Short).Show();
             }
             else if (id == Resource.Id.nav_settings)
             {

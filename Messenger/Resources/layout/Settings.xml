@@ -5,6 +5,7 @@
     android:minHeight="25px"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:theme="@style/Theme.AppCompat.NoActionBar"
     android:id="@+id/coordinatorLayout1">
     <com.google.android.material.appbar.AppBarLayout
         android:minWidth="25px"
@@ -28,7 +29,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/linearLayout1"
-            android:theme="@style/Theme.AppCompat.NoActionBar">
+            >
             <TextView
                 android:text="Font size"
                 android:textAppearance="?android:attr/textAppearanceMedium"
