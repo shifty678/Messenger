@@ -44,66 +44,66 @@ namespace Messenger
             Button Createaccount2 = FindViewById<Button>(Resource.Id.Login_button);
             Createaccount1.Click += Home;
 
-            var userloginview = FindViewById<TextView>(Resource.Id.UserLoginView);
-            var userlogintext = FindViewById<EditText>(Resource.Id.UsernameLogin);
+            //var userloginview = FindViewById<TextView>(Resource.Id.UserLoginView);
+            //var userlogintext = FindViewById<EditText>(Resource.Id.UsernameLogin);
 
-            var passloginview = FindViewById<TextView>(Resource.Id.PassLoginView);
-            var passlogintext = FindViewById<EditText>(Resource.Id.PasswordLogin);
+            //var passloginview = FindViewById<TextView>(Resource.Id.PassLoginView);
+            //var passlogintext = FindViewById<EditText>(Resource.Id.PasswordLogin);
 
-            var incorrect = FindViewById<TextView>(Resource.Id.Incorrect);
+            //var incorrect = FindViewById<TextView>(Resource.Id.Incorrect);
 
-            userlogintext.TextChanged += (object sender, Android.Text.TextChangedEventArgs n) =>
-            {
-                userloginview.Text = n.Text.ToString();
-            };
+            //userlogintext.TextChanged += (object sender, Android.Text.TextChangedEventArgs n) =>
+            //{
+            //    userloginview.Text = n.Text.ToString();
+            //};
 
-            passlogintext.TextChanged += (object sender, Android.Text.TextChangedEventArgs l) =>
-            {
-                passloginview.Text = l.Text.ToString();
-            };
+            //passlogintext.TextChanged += (object sender, Android.Text.TextChangedEventArgs l) =>
+            //{
+            //    passloginview.Text = l.Text.ToString();
+            //};
 
-            Button LoginButton = FindViewById<Button>(Resource.Id.Login_button);
-            LoginButton.Click += (sender, e) =>
-            {
+            //Button LoginButton = FindViewById<Button>(Resource.Id.Login_button);
+            //LoginButton.Click += (sender, e) =>
+            //{
 
-                SqlConnection con = new SqlConnection(SqlConnect);
+            //    SqlConnection con = new SqlConnection(SqlConnect);
 
-                SqlCommand check_User_Namelogin = new SqlCommand("SELECT COUNT (*) FROM [Users] WHERE ([Username] = @user)", con);
-                check_User_Namelogin.Parameters.AddWithValue("@user", userloginview.Text);
-                con.Open();
-                int UserExistlogin = (int)check_User_Namelogin.ExecuteScalar();
-
-
-                if (UserExistlogin > 0)
-                {
-
-                    SqlCommand checkpass = new SqlCommand("SELECT COUNT (*) FROM [Users] WHERE [Username] LIKE (@user) AND [Password] LIKE (@pass)", con);
-                    checkpass.Parameters.AddWithValue("@user", userloginview.Text);
-                    checkpass.Parameters.AddWithValue("@pass", passloginview.Text);
-                    int passcorrect = (int)checkpass.ExecuteScalar();
+            //    SqlCommand check_User_Namelogin = new SqlCommand("SELECT COUNT (*) FROM [Users] WHERE ([Username] = @user)", con);
+            //    check_User_Namelogin.Parameters.AddWithValue("@user", userloginview.Text);
+            //    con.Open();
+            //    int UserExistlogin = (int)check_User_Namelogin.ExecuteScalar();
 
 
-                    if (passcorrect > 0)
-                    {
-                        NavigationView navigationView = (NavigationView)FindViewById(Resource.Id.nav_view);
-                        //View headerView = navigationView.GetHeaderView(0);
-                        var navHeaderView = navigationView.InflateHeaderView(Resource.Layout.nav_header_main);
-                        TextView navUsername = (TextView)navHeaderView.FindViewById(Resource.Id.textView);
-                        navUsername.Text = "hello";
-                        Home(null, null);
-                    }
-                    else
-                    {
-                        incorrect.Visibility = ViewStates.Visible;
-                    }
-                }
+            //    if (UserExistlogin > 0)
+            //    {
 
-                else
-                {
-                    incorrect.Visibility = ViewStates.Visible;
-                }
-                con.Close();
-            };
+            //        SqlCommand checkpass = new SqlCommand("SELECT COUNT (*) FROM [Users] WHERE [Username] LIKE (@user) AND [Password] LIKE (@pass)", con);
+            //        checkpass.Parameters.AddWithValue("@user", userloginview.Text);
+            //        checkpass.Parameters.AddWithValue("@pass", passloginview.Text);
+            //        int passcorrect = (int)checkpass.ExecuteScalar();
+
+
+            //        if (passcorrect > 0)
+            //        {
+            //            //NavigationView navigationView = (NavigationView)FindViewById(Resource.Id.nav_view);
+            //            ////View headerView = navigationView.GetHeaderView(0);
+            //            //var navHeaderView = navigationView.InflateHeaderView(Resource.Layout.nav_header_main);
+            //            //TextView navUsername = (TextView)navHeaderView.FindViewById(Resource.Id.textView);
+            //            //navUsername.Text = "hello";
+            //            Home(null, null);
+            //        }
+            //        else
+            //        {
+            //            incorrect.Visibility = ViewStates.Visible;
+            //        }
+            //    }
+
+            //    else
+            //    {
+            //        incorrect.Visibility = ViewStates.Visible;
+            //    }
+            //    con.Close();
+            //};
 
 
         }
@@ -204,12 +204,137 @@ namespace Messenger
 
             Toolbar toolbar = FindViewById<Toolbar>(Resource.Id.settings_toolbar);
             SetSupportActionBar(toolbar);
-
+            toolbar.Title = "Settings";
             SupportActionBar.SetDisplayHomeAsUpEnabled(true);
             SupportActionBar.SetDisplayShowHomeEnabled(true);
 
-            toolbar.Title = "Settings";
+
+            var fontsmall = FindViewById<CheckBox>(Resource.Id.Smalltext);
+            var fontmed = FindViewById<CheckBox>(Resource.Id.Medtext);
+            var fontlar = FindViewById<CheckBox>(Resource.Id.Lartext);
+
+
+            var fontblue = FindViewById<CheckBox>(Resource.Id.Fontblue);
+            var fontgreen = FindViewById<CheckBox>(Resource.Id.Fontgreen);
+            var fontorange = FindViewById<CheckBox>(Resource.Id.Fontorange);
+
+
+            var appblue = FindViewById<CheckBox>(Resource.Id.Appblue);
+            var appgreen = FindViewById<CheckBox>(Resource.Id.Appgreen);
+            var apporange = FindViewById<CheckBox>(Resource.Id.Apporange);
+
+            // defualt px size ... 29px
+
+
+            //font Sizes
+
+            fontsmall.Click += (o, e) =>
+            {
+                if (fontsmall.Checked == true)
+                    fontsmall.SetTextSize(Android.Util.ComplexUnitType.Px,20);
+                Toast.MakeText(this, "You selected Small!", ToastLength.Short).Show();
+
+                if (fontsmall.Checked == false)
+                    fontsmall.SetTextSize(Android.Util.ComplexUnitType.Px,29);
+                Toast.MakeText(this, "You selected Default!", ToastLength.Short).Show();
+            };
+
+
+            fontmed.Click += (o, e) =>
+            {
+                if (fontmed.Checked == true)
+                    fontmed.SetTextSize(Android.Util.ComplexUnitType.Px, 45);
+                Toast.MakeText(this, "You selected Medium!", ToastLength.Short).Show();
+
+                if (fontmed.Checked == false)
+                    fontmed.SetTextSize(Android.Util.ComplexUnitType.Px, 29);
+                Toast.MakeText(this, "You selected Default!", ToastLength.Short).Show();
+            };
+            
+            
+            fontlar.Click += (o, e) =>
+            {
+                if (fontlar.Checked == true)
+                    fontlar.SetTextSize(Android.Util.ComplexUnitType.Px, 75);
+                Toast.MakeText(this, "You selected Large!", ToastLength.Short).Show();
+
+                if (fontlar.Checked == false)
+                    fontlar.SetTextSize(Android.Util.ComplexUnitType.Px, 29);
+                Toast.MakeText(this, "You selected Default!", ToastLength.Short).Show();
+            };
+
+
+
+            // Font Colours
+            fontblue.Click += (o, e) =>
+            {
+                if (fontblue.Checked == true)
+                    fontblue.SetTextColor(Android.Graphics.Color.Blue);
+                Toast.MakeText(this, "You selected Blue!", ToastLength.Short).Show();
+                
+                if (fontblue.Checked == false)
+                    fontblue.SetTextColor(Android.Graphics.Color.FloralWhite);
+                    Toast.MakeText(this, "You selected Default!", ToastLength.Short).Show();
+            };
+
+            fontgreen.Click += (o, e) =>
+            {
+                if (fontgreen.Checked == true)
+                    fontgreen.SetTextColor(Android.Graphics.Color.Green);
+                Toast.MakeText(this, "You selected Green!", ToastLength.Short).Show();
+
+                if (fontgreen.Checked == false)
+                    fontgreen.SetTextColor(Android.Graphics.Color.FloralWhite);
+                Toast.MakeText(this, "You selected Default!", ToastLength.Short).Show();
+            };
+
+            fontorange.Click += (o, e) =>
+            {
+                if (fontorange.Checked == true)
+                    fontorange.SetTextColor(Android.Graphics.Color.Orange);
+                Toast.MakeText(this, "You selected Orange!", ToastLength.Short).Show();
+
+                if (fontorange.Checked == false)
+                    fontorange.SetTextColor(Android.Graphics.Color.FloralWhite);
+                Toast.MakeText(this, "You selected Default!", ToastLength.Short).Show();
+            };
+
+            // app background colours
+            appblue.Click += (o, e) =>
+            {
+                if (appblue.Checked == true)
+                    appblue.SetBackgroundColor(Android.Graphics.Color.Blue);
+                Toast.MakeText(this, "You selected Orange!", ToastLength.Short).Show();
+
+                if (appblue.Checked == false)
+                    appblue.SetBackgroundColor(default);
+                Toast.MakeText(this, "You selected Default!", ToastLength.Short).Show();
+            };
+
+            appgreen.Click += (o, e) =>
+            {
+                if (appgreen.Checked == true)
+                    appgreen.SetBackgroundColor(Android.Graphics.Color.Green);
+                Toast.MakeText(this, "You selected Orange!", ToastLength.Short).Show();
+
+                if (appgreen.Checked == false)
+                    appgreen.SetBackgroundColor(default);
+                Toast.MakeText(this, "You selected Default!", ToastLength.Short).Show();
+            };
+
+            apporange.Click += (o, e) =>
+            {
+                if (apporange.Checked == true)
+                    apporange.SetBackgroundColor(Android.Graphics.Color.Orange);
+                Toast.MakeText(this, "You selected Orange!", ToastLength.Short).Show();
+
+                if (apporange.Checked == false)
+                    apporange.SetBackgroundColor(default);
+                Toast.MakeText(this, "You selected Default!", ToastLength.Short).Show();
+            };
         }
+
+
         private void FabOnClick(object sender, EventArgs eventArgs)
         {
             View view = (View)sender;
