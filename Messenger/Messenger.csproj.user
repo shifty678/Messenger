@@ -6,5 +6,6 @@
     <DefaultDevice>pixel_2_pie_9_0_-_api_28</DefaultDevice>
     <AndroidDesignerPreferredTheme>AppTheme.NoActionBar</AndroidDesignerPreferredTheme>
     <AndroidDesignerPreferredDevice>5.4in FWVGA</AndroidDesignerPreferredDevice>
+    <ProjectView>ShowAllFiles</ProjectView>
   </PropertyGroup>
 </Project>
